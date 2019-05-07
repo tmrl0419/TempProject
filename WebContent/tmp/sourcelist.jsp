@@ -21,9 +21,9 @@
 <img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
 	<div id="view-on" style="display:inline">
 	<form action="codecompare.jsp" id="compare">
-	<input type="text" id="code1" name="code1" readonly>
+	<input type="text" id="code1" name="code1">
 	<input type="submit" value="소스 비교">
-	<input type="text" id="code2" name="code2" readonly>
+	<input type="text" id="code2" name="code2">
 	</form>
 	</div>
 	<form id="analy" action="analysis.jsp" method="post">

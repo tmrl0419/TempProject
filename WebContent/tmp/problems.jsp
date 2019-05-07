@@ -20,11 +20,6 @@
 				String id = request.getParameter("id").toString();
 				String pw = request.getParameter("pw").toString();
 			%>
-			
-		<form action="solvedproblemGraph.jsp" method="post">
-			<input type="text" name="userId">
-			<input type="submit" value="유저의 푼 문제수 그래프 검색">
-		</form>
 		<form action="sourcelist.jsp" id="send" method="post">
 			<input type="hidden" name="problem" id="problem">
 			<div style=\"line-height:130%\">
