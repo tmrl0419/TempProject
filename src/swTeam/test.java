@@ -1,7 +1,6 @@
 package swTeam;
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.sql.*;
 
 public class test {
 	
@@ -163,6 +162,9 @@ public class test {
 	
 	static String UserId = "bjh6654";
 	static int PNumber = 1002;
+	static private Connection con = null;
+	static private final String DBNAME = "root";
+	static private final String PASSWORD = "qorwnsgg";
 	
 	public static void main(String[] args) {
 //		 TODO Auto-generated method stub
@@ -170,11 +172,25 @@ public class test {
 //		ArrayList<String> result = sa.Analysis(UserId, PNumber, code1);	// Userid, ProblemNumber, SourceCode 를 입력 받음.
 //		for ( int i = 0; i < result.size()-1; i++ )						// 아이디와 문제번호로 소스파일 및 분석결과 저장. ex) userid_number.java
 //			System.out.println(result.get(i));							// ArrayList<String> 으로 반환됨.
-		
-		CodeCompare cp = new CodeCompare(code0, code1);
+//		
+//		CodeCompare cp = new CodeCompare(code0, code1);
 //		ArrayList<Integer> result = cp.getDiff(0);						// getDiff(int index) >> index = 0 : 이전 파일에서 삭제된 인덱스, index = 1 : 현재파일에서 추가된 인덱스
 //		System.out.println(result);
-		System.out.println(cp.printCode(1));
+//		System.out.println(cp.printCode(1));
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			System.out.println("success load class");
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			con = DriverManager.getConnection("jdbc:mysql://buga.iptime.org:3306/web?characterEncoding=UTF-8&serverTimezone=UTC", DBNAME, PASSWORD);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			System.out.println("error occured");
+			e.printStackTrace();
+		}
 	}
 
 }

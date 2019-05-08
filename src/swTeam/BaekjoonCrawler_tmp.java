@@ -190,8 +190,8 @@ public class BaekjoonCrawler_tmp {
 			for ( int i = 1; i < rows.size(); i++ ) {
 				Element row = rows.get(i);
 				Elements cols = row.select("td");
-				String tmp = "<tr onclick='setcompare("+cols.get(0).ownText()+")' onMouseOver=\"this.style.backgroundColor='#FFF4E9';\" onMouseOut=\"this.style.backgroundColor=''\"><td><a href='#' ";
-				tmp += "onclick=\"change("+cols.get(0).ownText()+")\">"+cols.get(0).ownText()+"</a></td>";
+				String tmp = "<tr onclick='setcompare("+cols.get(0).ownText()+")' onMouseOver=\"this.style.backgroundColor='#FFF4E9';\" onMouseOut=\"this.style.backgroundColor=''\">";
+				tmp += "<td><a>"+cols.get(0).ownText()+"</a></td>";
 				if ( cols.get(3).text().contains("¸Â¾Ò") )
 					tmp += "<td style='font-weight:bold; color:green;'>"+cols.get(3).text()+"</td>";
 				else
@@ -302,7 +302,9 @@ public class BaekjoonCrawler_tmp {
 			
 			
 			for( int i = 0; i < unsolvedProblem.size(); ++i ) {
-				res.add(unsolvedProblem.get(i).text());
+				String tmp = "<a href='#' ";
+				tmp += "onclick=\"change("+unsolvedProblem.get(i).text()+")\">"+unsolvedProblem.get(i).text()+"</a>";
+				res.add(tmp);
 			}  
 
 			

@@ -25,7 +25,7 @@
 		    
 		    <%
 			    for(int i = 0 ; i < ans.size(); ++i) {
-			    	out.println("data.addRow([\'" +ans.get(i)[0] + "\', " + ans.get(i)[2] + "]);");
+			    	out.println("data.addRow([\'" +ans.get(i)[0] + "\', " + ans.get(i)[1] + "]);");
 			    }
 		    %>
 		    

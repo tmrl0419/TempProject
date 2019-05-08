@@ -5,8 +5,8 @@ import java.util.Map;
 public class Cookie {
 	
 	private static Cookie cookie = new Cookie();
-	public Map<String, String> loginCookie;
-	public String userID;
+	public Map<String, String> loginCookie = null;
+	public String userID = null;
 	
 	private Cookie() {
 	}

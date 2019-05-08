@@ -17,6 +17,7 @@ public class SourceAnalysis {
 	private static URL url;
 	private static URLConnection conn;
 	private static int type;
+	private static int remove = 2;
 	
 	public SourceAnalysis(String t) {
 		type = Integer.parseInt(t);
@@ -77,7 +78,9 @@ public class SourceAnalysis {
 		if ( result.isEmpty() )
 			result.add("There is no code smells or Analysis is not done");
 		String r = "";
-		for ( int i = 0; i < result.size()-1; i++ )
+		if ( type == 0 )
+			remove = 1;
+		for ( int i = 0; i < result.size()-remove; i++ )
 			r += result.get(i)+"\n";
 		return r;
 	}

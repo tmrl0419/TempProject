@@ -1,12 +1,43 @@
 <%@ page import="swTeam.BaekjoonCrawler_tmp,swTeam.Cookie, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
+<%@ page import="web.*" %>
+<%
+	Database db = new Database();
+	request.setCharacterEncoding("UTF-8");
+	Cookie ck = Cookie.getInstance();
+	BaekjoonCrawler_tmp boj = new BaekjoonCrawler_tmp(ck.loginCookie);
+	String userid = ck.userID;
+	ArrayList<String[]> ans = db.readUserdata(userid, "solvedproblem");
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 </head>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
+	google.charts.load('current', {'packages':['line']});
+	google.charts.setOnLoadCallback(drawChart);	
+	function drawChart() {
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('string', 'date');
+	    data.addColumn('number', '푼 문제 수');
+	    <%
+		    for(int i = 0 ; i < ans.size(); ++i) {
+		    	out.println("data.addRow([\'" +ans.get(i)[0] + "\', " + ans.get(i)[1] + "]);");
+		    }
+	    %>
+	    var options = {
+			chart: {
+	        	title: '<%=userid%>' + '님이 푼 문제 수 그래프',
+			},
+	      	width: 700,
+	      	height: 250
+	    };
+	    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+	    chart.draw(data, google.charts.Line.convertOptions(options));
+	}
 	function change(val) {
 		var value = val;
 		document.getElementById("problem").value = value;
@@ -14,33 +45,33 @@
 	}
 </script>
 <body>
-	<center>
-		<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
-			<%
-				String id = request.getParameter("id").toString();
-				String pw = request.getParameter("pw").toString();
-			%>
-		<form action="solvedproblemGraph.jsp" method="post">
-			<input type="text" name="userId">
-			<input type="submit" value="유저 푼 문제수 그래프 보여주기">
-		</form>
+<center>
+	<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
+		<p id="data"> </p>
+		<div id='linechart_material'></div>
 		<form action="sourcelist.jsp" id="send" method="post">
 			<input type="hidden" name="problem" id="problem">
 			<div style=\"line-height:130%\">
 				<h2>내가 푼 문제</h2>
 					<h3>
 						<%
-							BaekjoonCrawler_tmp boj = new BaekjoonCrawler_tmp(id, pw);
-							Cookie ck = Cookie.getInstance();
-							ck.setCookie(boj.getCookie());
-							ck.setUserId(boj.getuserID());
 							ArrayList<String> problems = boj.crawlSolvedProblem(ck.userID);
 							for ( int i = 0; i < problems.size(); i++ )
 								out.print(problems.get(i)+"\t");
 						%>
 					</h3>
-				</div>
+			</div>
+			<div style=\"line-height:130%\">
+				<h2>틀린 문제</h2>
+					<h3>
+						<%
+							ArrayList<String> unproblems = boj.crawlUnsolvedProblem(ck.userID);
+							for ( int i = 0; i < unproblems.size(); i++ )
+								out.print(unproblems.get(i)+"\t");
+						%>
+					</h3>
+			</div>
 		</form>
-	</center>
+</center>
 </body>
 </html>
