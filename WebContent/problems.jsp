@@ -1,4 +1,4 @@
-<%@ page import="swTeam.BaekjoonCrawler_tmp,swTeam.Cookie, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
+<%@ page import="datateam.BaekjoonCrawler_tmp,datateam.Cookie, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <%@ page import="web.*" %>
 <%
