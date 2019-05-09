@@ -1,7 +1,11 @@
 package web;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 // jsp�뿉�꽌 �벝 �븣 癒쇱� db 媛앹껜瑜� 留뚮뱾�뼱�꽌 db �뿰寃곗쓣 �닔由�
 // db.selectUserInformations濡� user�쓽 �썝�븯�뒗 �젙蹂� �뱾怨좎삤怨�
 // db.getClosed()濡� �닔由쎈맂 �뿰寃� �빐�젣
@@ -55,6 +59,18 @@ public class Database {
 			e.printStackTrace();
 		}
 		return ret;
+	}
+	
+	public void insert(String userId, String number ) {
+		try {
+			Statement stmt = con.createStatement();
+			String selectSQL = "INSERT INTO solvedproblem VALUES('" + userId + "', sysdate(),'" + number + "')"
+					+ " ON DUPLICATE KEY UPDATE userid='" + userId + "', date=sysdate();";
+			stmt.executeUpdate(selectSQL);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

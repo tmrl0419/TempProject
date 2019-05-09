@@ -7,6 +7,9 @@
 	Cookie ck = Cookie.getInstance();
 	BaekjoonCrawler_tmp boj = new BaekjoonCrawler_tmp(ck.loginCookie);
 	String userid = ck.userID;
+	ArrayList<String> problems = boj.crawlSolvedProblem(ck.userID);
+	ArrayList<String> unproblems = boj.crawlUnsolvedProblem(ck.userID);
+	db.insert(userid, problems.size()+"");
 	ArrayList<String[]> ans = db.readUserdata(userid, "solvedproblem");
 %>
 <!DOCTYPE html>
@@ -33,7 +36,7 @@
 	        	title: '<%=userid%>' + '님이 푼 문제 수 그래프',
 			},
 	      	width: 700,
-	      	height: 250
+	      	height: 400
 	    };
 	    var chart = new google.charts.Line(document.getElementById('linechart_material'));
 	    chart.draw(data, google.charts.Line.convertOptions(options));
@@ -55,7 +58,6 @@
 				<h2>내가 푼 문제</h2>
 					<h3>
 						<%
-							ArrayList<String> problems = boj.crawlSolvedProblem(ck.userID);
 							for ( int i = 0; i < problems.size(); i++ )
 								out.print(problems.get(i)+"\t");
 						%>
@@ -65,7 +67,6 @@
 				<h2>틀린 문제</h2>
 					<h3>
 						<%
-							ArrayList<String> unproblems = boj.crawlUnsolvedProblem(ck.userID);
 							for ( int i = 0; i < unproblems.size(); i++ )
 								out.print(unproblems.get(i)+"\t");
 						%>
