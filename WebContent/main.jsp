@@ -27,10 +27,12 @@
 		<h1><%=userid %> 님 환영합니다.</h1>
 		<a href="#" onclick="myinfo()">내정보</a>
 		</div>
-		<form id="send" action="main.jsp" method="post" style="display:none">
-			<p>ID : <input type="text" placeholder="아이디를 입력하세요" name="id"></p>
-			<p>PW : <input type="password" placeholder="비밀번호를 입력하세요" name="pw"></p>
-			<input type="submit" value="Login">
+		<form id="send" class="form-inline" action="main.jsp" method="post" style="display:none">
+		<div class="form-group">
+			<p><input type="text" class="form-control" placeholder="아이디를 입력하세요" name="id"></p>
+			<p><input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="pw"></p>
+			<button class="btn btn-primary" type="submit" value="Login">Login</button>
+		</div>
 		</form>
 	</center>
 </body>

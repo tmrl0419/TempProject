@@ -22,7 +22,7 @@
 	<div id="view-on" style="display:inline">
 	<form action="codecompare.jsp" id="compare">
 	<input type="text" id="code1" name="code1">
-	<input type="submit" value="소스 비교">
+	<button class="btn btn-primary" type="submit">소스 비교</button>
 	<input type="text" id="code2" name="code2">
 	</form>
 	</div>
