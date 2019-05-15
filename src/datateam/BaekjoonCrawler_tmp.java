@@ -62,7 +62,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
 	                .get();
 			Elements User = document.getElementsByClass("pull-right");
 			Elements u = User.get(0).getElementsByClass("username");
@@ -113,7 +113,7 @@ public class BaekjoonCrawler_tmp {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
 				                .get();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
@@ -192,7 +192,7 @@ public class BaekjoonCrawler_tmp {
 				Elements cols = row.select("td");
 				String tmp = "<tr onclick='setcompare("+cols.get(0).ownText()+")' onMouseOver=\"this.style.backgroundColor='#FFF4E9';\" onMouseOut=\"this.style.backgroundColor=''\">";
 				tmp += "<td><a>"+cols.get(0).ownText()+"</a></td>";
-				if ( cols.get(3).text().contains("�¾�") )
+				if ( cols.get(3).text().contains("�¾�") )
 					tmp += "<td style='font-weight:bold; color:green;'>"+cols.get(3).text()+"</td>";
 				else
 					tmp += "<td style='font-weight:bold; color:red;'>"+cols.get(3).text()+"</td>";
@@ -200,13 +200,13 @@ public class BaekjoonCrawler_tmp {
 					tmp += "<td>"+cols.get(5).text()+" ms"+"</td>";
 				else
 					tmp += "<td></td>";
-				tmp += "<td>"+cols.get(6).text().replace(" / ����", "")+"</td>";
+				tmp += "<td>"+cols.get(6).text().replace(" / ����", "")+"</td>";
 				tmp += "<td>"+cols.get(8).text()+"</td>";
 				String val = "0";
 				if ( cols.get(6).text().contains("Java") )
 					val = "1";
 				tmp += "<td><a href='#' ";
-				tmp += "onclick=\"analysis("+cols.get(0).ownText()+","+val+")\">�ҽ� �м�</a></td>";
+				tmp += "onclick=\"analysis("+cols.get(0).ownText()+","+val+")\">�ҽ� �м�</a></td>";
 				tmp += "</tr>";
 				res.add(tmp);
 			}
@@ -229,7 +229,7 @@ public class BaekjoonCrawler_tmp {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
 				                .get();
 				Elements sources = document.getElementsByTag("textarea");
 				source = sources.get(0).ownText().trim();
@@ -240,6 +240,81 @@ public class BaekjoonCrawler_tmp {
 		return source;
 	}
 	
+	public ArrayList<String> crawlSolvedProblem_kimjuho(String userID) {
+		String UserPageURL = MAINURL + "/user/" +  userID;
+		Document doc = null;
+		ArrayList < String > res = new ArrayList< String >();
+		
+		if(loginCookie == null) {
+			System.err.println("Login cookie is not acquired.");
+		}
+		
+		try {
+			doc = Jsoup.connect(UserPageURL)
+	                .userAgent(userAgent)
+	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
+	                .header("Upgrade-Insecure-Requests", "1")	
+	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .get();
+			
+			final String TARGET_CLASS = "panel-body";
+			final String SPLIT_CLASS = "span.problem_number";
+			
+			
+			Elements myProblemList = doc.getElementsByClass(TARGET_CLASS);
+			Elements solvedProblem = myProblemList.get(0).select(SPLIT_CLASS);
+			
+			
+			
+			for( int i = 0; i < solvedProblem.size(); ++i ) {
+				res.add(solvedProblem.get(i).text());
+			}  
+
+			
+			
+		} catch(IOException e) {
+			System.err.println("Fail to get User Information");
+		}
+		return res;
+	}
+	
+	public ArrayList<String> crawlUnsolvedProblem_kimjuho(String userID){
+		String UserPageURL = MAINURL + "/user/" +  userID;
+		Document doc = null;
+		ArrayList < String > res = new ArrayList< String >();
+		
+		if(loginCookie == null) {
+			System.err.println("Login cookie is not acquired.");
+		}
+		
+		try {
+			doc = Jsoup.connect(UserPageURL)
+	                .userAgent(userAgent)
+	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
+	                .header("Upgrade-Insecure-Requests", "1")	
+	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .get();
+			
+			final String TARGET_CLASS = "panel-body";
+			final String SPLIT_CLASS = "span.problem_number";
+			
+			
+			Elements myProblemList = doc.getElementsByClass(TARGET_CLASS);
+			Elements unsolvedProblem = myProblemList.get(1).select(SPLIT_CLASS);
+			
+			
+			
+			for( int i = 0; i < unsolvedProblem.size(); ++i ) {
+				res.add(unsolvedProblem.get(i).text());
+			}  
+
+			
+			
+		} catch(IOException e) {
+			System.err.println("Fail to get User Information");
+		}
+		return res;
+	}
 	public ArrayList<String> crawlSolvedProblem(String userID){
 		String UserPageURL = MAINURL + "/user/" +  userID;
 		Document doc = null;
@@ -254,7 +329,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -289,7 +364,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
