@@ -1,5 +1,5 @@
-<%@ page import="datateam.BaekjoonCrawler_tmp,datateam.Cookie, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page import="datateam.BaekjoonCrawler_tmp,datateam.Cookie, java.util.*" language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="web.*" %>
 <%
 	Database db = new Database();
@@ -9,7 +9,10 @@
 	String userid = ck.userID;
 	ArrayList<String> problems = boj.crawlSolvedProblem(ck.userID);
 	ArrayList<String> unproblems = boj.crawlUnsolvedProblem(ck.userID);
-	db.insert(userid, problems.size()+"");
+	ArrayList<String> problems_kimjuho = boj.crawlSolvedProblem_kimjuho(ck.userID);
+	ArrayList<String> unproblems_kimjuho = boj.crawlUnsolvedProblem_kimjuho(ck.userID);
+	db.insert(userid, "solvedproblem", problems_kimjuho);
+	db.insert(userid, "unsolvedproblem", unproblems_kimjuho);
 	ArrayList<String[]> ans = db.readUserdata(userid, "solvedproblem");
 %>
 <!DOCTYPE html>
@@ -24,8 +27,8 @@
 	google.charts.setOnLoadCallback(drawChart);	
 	function drawChart() {
 	    var data = new google.visualization.DataTable();
-	    data.addColumn('string', 'date');
-	    data.addColumn('number', 'Ç¬ ¹®Á¦ ¼ö');
+	    data.addColumn('string', 'today');
+	    data.addColumn('number', 'í‘¼ ë¬¸ì œ ìˆ˜');
 	    <%
 		    for(int i = 0 ; i < ans.size(); ++i) {
 		    	out.println("data.addRow([\'" +ans.get(i)[0] + "\', " + ans.get(i)[1] + "]);");
@@ -33,7 +36,7 @@
 	    %>
 	    var options = {
 			chart: {
-	        	title: '<%=userid%>' + '´ÔÀÌ Ç¬ ¹®Á¦ ¼ö ±×·¡ÇÁ',
+	        	title: '<%=userid%>' + 'ë‹˜ì´ í‘¼ ë¬¸ì œ ìˆ˜ ê·¸ë˜í”„',
 			},
 	      	width: 700,
 	      	height: 400
@@ -55,7 +58,7 @@
 		<form action="sourcelist.jsp" id="send" method="post">
 			<input type="hidden" name="problem" id="problem">
 			<div style=\"line-height:130%\">
-				<h2>³»°¡ Ç¬ ¹®Á¦</h2>
+				<h2>ë‚´ê°€ í‘¼ ë¬¸ì œ</h2>
 					<h3>
 						<%
 							for ( int i = 0; i < problems.size(); i++ )
@@ -64,7 +67,7 @@
 					</h3>
 			</div>
 			<div style=\"line-height:130%\">
-				<h2>Æ²¸° ¹®Á¦</h2>
+				<h2>í‹€ë¦° ë¬¸ì œ</h2>
 					<h3>
 						<%
 							for ( int i = 0; i < unproblems.size(); i++ )
