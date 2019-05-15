@@ -355,13 +355,13 @@ public class BaekjoonCrawler {
 		
 	}
 	
-	public static void main(String[] args) {
-		String userID = "ksaid0203";
-		String userPW = "rlawngh2@";
-		
-		BaekjoonCrawler bojcrawl = new BaekjoonCrawler(userID,userPW);
-		//bojcrawl.writeProblemJson("1001");
-		//bojcrawl.writeUserInfoJson("userID");
-	}
+//	public static void main(String[] args) {
+//		String userID = "ksaid0203";
+//		String userPW = "rlawngh2@";
+//		
+//		BaekjoonCrawler bojcrawl = new BaekjoonCrawler(userID,userPW);
+//		bojcrawl.writeProblemJson("1001");
+//		bojcrawl.writeUserInfoJson("userID");
+//	}
 	
 }
