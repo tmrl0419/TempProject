@@ -62,7 +62,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
 	                .get();
 			Elements User = document.getElementsByClass("pull-right");
 			Elements u = User.get(0).getElementsByClass("username");
@@ -84,7 +84,7 @@ public class BaekjoonCrawler_tmp {
 		try {
 		response = Jsoup.connect("https://www.acmicpc.net/signin")
                         .userAgent(userAgent)
-                        .timeout(3000)
+                        .timeout(7000)
                         .data(data)
                         .method(Connection.Method.POST)
                         .execute();
@@ -92,8 +92,8 @@ public class BaekjoonCrawler_tmp {
 			System.err.println("Failed to connect login server.");
 		}
 		
-		// ·Î±×?Î ¼º°ø ÈÄ ¾ò?º ÄíÅ°¸¦ ¸â¹ö º¯¼ö·Î ?ú?å.
-		// ÄíÅ° Áß TSESSION ?Ì¶ó´Â °ª?» È®?ÎÇÒ ¼ö ?Ö´Ù.
+		// 쨌횓짹횞?횓 쩌쨘째첩 횊횆 쩐챵?쨘 횆챠횇째쨍짝 쨍창쨔철 쨘짱쩌철쨌횓 ?첬?책.
+		// 횆챠횇째 횁횩 TSESSION ?횑쨋처쨈횂 째짧?쨩 횊짰?횓횉횘 쩌철 ?횜쨈횢.
 		this.loginCookie = response.cookies();
 	}
 	
@@ -113,7 +113,7 @@ public class BaekjoonCrawler_tmp {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+				                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
 				                .get();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
@@ -192,7 +192,7 @@ public class BaekjoonCrawler_tmp {
 				Elements cols = row.select("td");
 				String tmp = "<tr onclick='setcompare("+cols.get(0).ownText()+")' onMouseOver=\"this.style.backgroundColor='#FFF4E9';\" onMouseOut=\"this.style.backgroundColor=''\">";
 				tmp += "<td><a>"+cols.get(0).ownText()+"</a></td>";
-				if ( cols.get(3).text().contains("�¾�") )
+				if ( cols.get(3).text().contains("맞았") )
 					tmp += "<td style='font-weight:bold; color:green;'>"+cols.get(3).text()+"</td>";
 				else
 					tmp += "<td style='font-weight:bold; color:red;'>"+cols.get(3).text()+"</td>";
@@ -200,13 +200,13 @@ public class BaekjoonCrawler_tmp {
 					tmp += "<td>"+cols.get(5).text()+" ms"+"</td>";
 				else
 					tmp += "<td></td>";
-				tmp += "<td>"+cols.get(6).text().replace(" / ����", "")+"</td>";
+				tmp += "<td>"+cols.get(6).text().replace(" / 수정", "")+"</td>";
 				tmp += "<td>"+cols.get(8).text()+"</td>";
 				String val = "0";
 				if ( cols.get(6).text().contains("Java") )
 					val = "1";
 				tmp += "<td><a href='#' ";
-				tmp += "onclick=\"analysis("+cols.get(0).ownText()+","+val+")\">�ҽ� �м�</a></td>";
+				tmp += "onclick=\"analysis("+cols.get(0).ownText()+","+val+")\">소스 분석</a></td>";
 				tmp += "</tr>";
 				res.add(tmp);
 			}
@@ -229,10 +229,11 @@ public class BaekjoonCrawler_tmp {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+				                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
 				                .get();
 				Elements sources = document.getElementsByTag("textarea");
-				source = sources.get(0).ownText().trim();
+				source = sources.get(0).ownText().trim().replace("<", "&lt");
+				source = source.replace(">", "&gt");
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
 			}
@@ -254,7 +255,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -292,7 +293,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -329,7 +330,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -364,7 +365,7 @@ public class BaekjoonCrawler_tmp {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì?��????��?¿½ì???ï¿½ë?' ??��?¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
