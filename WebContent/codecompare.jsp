@@ -26,6 +26,7 @@
 %>
 <div style='display:inline; width:1200px;'>
 <div class="code" style="float:left">
+<h2> <%=request.getParameter("code1") %> </h2>
 <pre>
 <%
 out.print(cp.printCode(0));

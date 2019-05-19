@@ -5,10 +5,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BAEKJOON.GG</title>
-<link rel="stylesheet" href="css/bootstrap.css">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+
 </head>
-<body>
+
 <%
 	String userid = null;
 	String id = request.getParameter("id"), pw = request.getParameter("pw");
@@ -20,22 +21,57 @@
 		userid = ck.userID;
 	}
 %>
-	<form id="problem" action="problems.jsp" method="post"></form>
-	<center>
-		<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
-		<div id="welcome">
-		<h1><%=userid %> 님 환영합니다.</h1>
-		<a href="#" onclick="myinfo()">내정보</a>
-		</div>
-		<form id="send" class="form-inline" action="main.jsp" method="post" style="display:none">
-		<div class="form-group">
-			<p><input type="text" class="form-control" placeholder="아이디를 입력하세요" name="id"></p>
-			<p><input type="password" class="form-control" placeholder="비밀번호를 입력하세요" name="pw"></p>
-			<button class="btn btn-primary" type="submit" value="Login">Login</button>
-		</div>
+<body>
+	<form id="problem" action="problems.jsp" method="post" style="display:none"></form>
+		<!-- <img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p> -->
+		
+			<header id="header">
+				<div class="inner">
+					<a href="main.jsp" class="logo">BACKJOON.GG</a>
+					<nav id="nav">
+						<a href="main.jsp">메인</a>
+						<a href="">링크 1</a>
+					</nav>
+				</div>
+			</header>
+			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+			
+			<div id="welcome">
+			<h1><%=userid %> 님 환영합니다.</h1>
+			<a href="#" onclick="myinfo()">내정보</a>	
+			</div>
+
+			<form id="send" class="form-inline" action="main.jsp" method="post" style="display:none">
+
+			<section id="banner">
+				<div class="inner">
+					<h1>BackJoon.GG:</h1>
+				</div>
+				
+				<div class="inner">
+					<form method="post" action="#">
+						<div class="field half first">
+							<label for="name">ID</label>
+							<input type="text" name="id" placeholder="ID"/>
+						</div>
+						<div class="field half">
+							<label for="email">Password</label>
+							<input type="password" name="pw" placeholder="Password" />
+						</div>
+						<ul class="actions">
+							<center><li><input type="submit" value="Login" class="alt"/></li></center>
+						</ul>
+					</form>
+				</div>
 		</form>
-	</center>
+	
 </body>
+	
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
+	
 <script type="text/javascript">
 	function check() {
 		var id = <%=userid%>;
