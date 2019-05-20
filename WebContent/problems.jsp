@@ -1,11 +1,11 @@
-<%@ page import="datateam.BaekjoonCrawler_tmp,datateam.Cookie, java.util.*" language="java" contentType="text/html; charset=UTF-8"
+<%@ page import="datateam.BaekjoonCrawler,datateam.Cookie,java.util.*" language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="web.*" %>
 <%
 	Database db = new Database();
 	request.setCharacterEncoding("UTF-8");
 	Cookie ck = Cookie.getInstance();
-	BaekjoonCrawler_tmp boj = new BaekjoonCrawler_tmp(ck.loginCookie);
+	BaekjoonCrawler boj = new BaekjoonCrawler(ck.loginCookie);
 	String userid = ck.userID;
 	ArrayList<String> problems = boj.crawlSolvedProblem(ck.userID);
 	ArrayList<String> unproblems = boj.crawlUnsolvedProblem(ck.userID);

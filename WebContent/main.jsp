@@ -1,4 +1,4 @@
- <%@ page import="datateam.BaekjoonCrawler_tmp,datateam.Cookie, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
+ <%@ page import="datateam.BaekjoonCrawler,datateam.Cookie,java.util.*" language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -14,7 +14,7 @@
 	String userid = null;
 	String id = request.getParameter("id"), pw = request.getParameter("pw");
 	if ( id != null && pw != null ) {
-		BaekjoonCrawler_tmp boj = new BaekjoonCrawler_tmp(id, pw);
+		BaekjoonCrawler boj = new BaekjoonCrawler(id, pw);
 		Cookie ck = Cookie.getInstance();
 		ck.setCookie(boj.getCookie());
 		ck.setUserId(boj.getuserID());
