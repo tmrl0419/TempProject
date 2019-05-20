@@ -1,6 +1,5 @@
 package datateam;
 
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,6 +14,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.json.simple.JSONObject;
 
 public class BaekjoonCrawler {
 	
@@ -25,6 +25,8 @@ public class BaekjoonCrawler {
 	
 	public Document problemPageDocument = null;
 	private Map<String,String> loginCookie = null;
+	
+	
 	
 	// Constructor
 	public BaekjoonCrawler(String userID, String userPassword) {
@@ -37,6 +39,105 @@ public class BaekjoonCrawler {
 	}
 	
 	// Methods
+	public HashMap<String,String> getMap(){
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("C++14","88");
+		map.put("Java","3");
+		map.put("Python 3","28");
+		map.put("C11","75");
+		map.put("PyPy3","73");
+		map.put("C","0");
+		map.put("C++","1");
+		map.put("C++11","49");
+		map.put("C++17","84");
+		map.put("Java (OpenJDK)","91");
+		map.put("Java 11","91");
+		map.put("Python 2","6");
+		map.put("PyPy2","32");
+		map.put("Ruby 2.5","68");
+		map.put("Kotlin (JVM)","69");
+		map.put("Kotlin (Native)","92");
+		map.put("Swift","74");
+		map.put("Text","74");
+		map.put("C# 6.0","62");
+		map.put("C# 6.0 (.NET)","86");
+		map.put("node.js","17");
+		map.put("Go","12");
+		map.put("Go (gccgo)","90");
+		map.put("D","29");
+		map.put("F#","37");
+		map.put("PHP","7");
+		map.put("Rust","44");
+		map.put("Rust 2018","94");
+		map.put("Pascal","2");
+		map.put("Scala","15");
+		map.put("Lua","16");
+		map.put("Perl","8");
+		map.put("Perl6","42");
+		map.put("Ruby 1.8","4");
+		map.put("Ruby 1.9","65");
+		map.put("R","72");
+		map.put("Haskell","11");
+		map.put("Object-C","10");
+		map.put("Object-C++","11");
+		map.put("C (Clang)","59");
+		map.put("C++ (Clang)","60");
+		map.put("C++11 (Clang)","66");
+		map.put("C++14 (Clang)","67");
+		map.put("C11 (Clang)","77");
+		map.put("C++17 (Clang)","85");
+		map.put("Ceylon","76");
+		map.put("Golfscript","79");
+		map.put("Octave","89");
+		map.put("Assembly (32bit)","27");
+		map.put("Assembly (64bit)","87");
+		map.put("C# 3.0","9");
+		map.put("VB.NET 2.0","20");
+		map.put("VB.NET 4.0","63");
+		map.put("Bash","5");
+		map.put("Fortran","13");
+		map.put("Scheme","14");
+		map.put("CoffeeScript","18");
+		map.put("Ada","19");
+		map.put("awk","21");
+		map.put("OCaml","22");
+		map.put("Brainfuck","23");
+		map.put("Whitespace","24");
+		map.put("Groovy","25");
+		map.put("Tcl","26");
+		map.put("Commom Lisp","30");
+		map.put("Erlang","31");
+		map.put("Clojure","33");
+		map.put("Rhino","34");  		
+		map.put("Cobol","35");
+		map.put("Smalltalk","36");
+		map.put("SpiderMonkey","38");
+		map.put("Falcon","39");
+		map.put("Factor","40");
+		map.put("Pike","41");
+		map.put("sed","43");
+		map.put("Dart","45");
+		map.put("Boo","46");
+		map.put("Intercal","47");
+		map.put("bc","48");
+		map.put("Oz","50");
+		map.put("Alice","51");
+		map.put("Prolog","52");
+		map.put("Nemerle","53");
+		map.put("Cobra","54");
+		map.put("Nimrod","55");
+		map.put("Forth","56");
+		map.put("Julia","57");
+		map.put("Io","61");
+		map.put("Algol 68","70");
+		map.put("Befunge","71");
+		map.put("FreeBASIC","78");
+		map.put("Gosu","80");
+		map.put("Haxe","81");
+		map.put("LOLCODE","82");
+		map.put("아희","83");
+	    return map;	
+	}
 	
 	public static void checkInternetConnection() {
 		Document document = null;
@@ -62,7 +163,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
+	                .cookies(loginCookie) 
 	                .get();
 			Elements User = document.getElementsByClass("pull-right");
 			Elements u = User.get(0).getElementsByClass("username");
@@ -92,8 +193,6 @@ public class BaekjoonCrawler {
 			System.err.println("Failed to connect login server.");
 		}
 		
-		// 쨌횓짹횞?횓 쩌쨘째첩 횊횆 쩐챵?쨘 횆챠횇째쨍짝 쨍창쨔철 쨘짱쩌철쨌횓 ?첬?책.
-		// 횆챠횇째 횁횩 TSESSION ?횑쨋처쨈횂 째짧?쨩 횊짰?횓횉횘 쩌철 ?횜쨈횢.
 		this.loginCookie = response.cookies();
 	}
 	
@@ -113,7 +212,7 @@ public class BaekjoonCrawler {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
+				                .cookies(loginCookie) 
 				                .get();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
@@ -229,16 +328,72 @@ public class BaekjoonCrawler {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
+				                .cookies(loginCookie) 
 				                .get();
-				Elements sources = document.getElementsByTag("textarea");
-				source = sources.get(0).ownText().trim().replace("<", "&lt");
-				source = source.replace(">", "&gt");
+				Elements box = document.getElementsByClass("col-lg-12");
+				source = box.text();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
 			}
 		}
 		return source;
+	}
+	
+public void writeProblemCodes(String problemID, String language){
+		
+		Document doc = null;
+		JSONObject jsonObject = new JSONObject();
+		
+		if(loginCookie == null) {
+			System.err.println("Login cookie is not acquired.");
+		}
+		
+		try {
+			// 1페이지에 공개코드가 5개 이하일 경우  추가해야함, pageNum을 증가시켜 다음페이지 탐색.
+			String pageNum = "1";			
+			String codePage = MAINURL + "problem/status/"+ problemID + "/" + language + "/"+pageNum;
+			doc = Jsoup.connect(codePage)
+	                .userAgent(userAgent)
+	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
+	                .header("Upgrade-Insecure-Requests", "1")	
+	                .cookies(loginCookie) 
+	                .get();
+						
+			Elements elements = doc.getElementsByTag("tr");
+			int count = 0;		
+			for( Element e: elements ) {
+				Elements tdElements = e.select("td");
+				if(tdElements.size() > 5) {
+			
+					Elements temp1 = tdElements.get(6).select("a");
+		
+					if(!temp1.isEmpty()) {
+						String rank = tdElements.get(0).text();
+						String sumitNum = temp1.get(1).text();
+						String source = getSource(sumitNum);
+						String key = "code"+rank;
+						jsonObject.put(key, source);
+						count++;
+					}
+				}
+				if(count >= 5) break;
+			}
+			
+		} catch(IOException e) {
+			System.err.println("Fail to get User Information");
+		}
+		
+		File file = new File("data/sources/"+problemID+".json");
+		
+		try {
+			FileWriter fw = new FileWriter(file);
+			fw.write(jsonObject.toString());
+			fw.close();
+		} catch(IOException e) {
+			e.printStackTrace();
+		}
+		
+		return;
 	}
 	
 	public ArrayList<String> crawlSolvedProblem_kimjuho(String userID) {
@@ -255,7 +410,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
+	                .cookies(loginCookie)
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -293,7 +448,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
+	                .cookies(loginCookie)
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -330,7 +485,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
+	                .cookies(loginCookie)
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -365,7 +520,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙?占쏙옙????占쏙옙?쩔쩍챙???챦쩔쩍챘?' ??占쏙옙?짖혧챗쨋탐
+	                .cookies(loginCookie) 
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -465,7 +620,7 @@ public class BaekjoonCrawler {
 			System.out.print(jsonResult);
 		}
 		
-		//Write problem json as problemID.json
+		//Write problem json as userID.json
 		File file = new File("data/users/"+userID+".json");
 		
 		try {
