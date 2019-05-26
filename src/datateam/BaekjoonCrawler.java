@@ -69,8 +69,8 @@ public class BaekjoonCrawler {
 			System.err.println("Failed to connect login server.");
 		}
 		
-		// ·Î±×ÀÎ ¼º°ø ÈÄ ¾òÀº ÄíÅ°¸¦ ¸â¹ö º¯¼ö·Î ÀúÀå.
-		// ÄíÅ° Áß TSESSION ÀÌ¶ó´Â °ªÀ» È®ÀÎÇÒ ¼ö ÀÖ´Ù.
+		// 쨌횓짹횞�횓 쩌쨘째첩 횊횆 쩐챵�쨘 횆챠횇째쨍짝 쨍창쨔철 쨘짱쩌철쨌횓 �첬�책.
+		// 횆챠횇째 횁횩 TSESSION �횑쨋처쨈횂 째짧�쨩 횊짰�횓횉횘 쩌철 �횜쨈횢.
 		this.loginCookie = response.cookies();
 	}
 	
@@ -86,7 +86,7 @@ public class BaekjoonCrawler {
 				                .userAgent(userAgent)
 				                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 				                .header("Upgrade-Insecure-Requests", "1")	
-				                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+				                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
 				                .get();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
@@ -154,7 +154,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -192,7 +192,7 @@ public class BaekjoonCrawler {
 	                .userAgent(userAgent)
 	                .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3")
 	                .header("Upgrade-Insecure-Requests", "1")	
-	                .cookies(loginCookie) // acquireLoginCookieï¿½ë?ï¿½ê? ï¿½ë¼¸ï¿½ï¿½ 'æ¿¡ì’“?‡ï¿½ì”?ï¿½ë?' ?‘ì¢ê¶Ž
+	                .cookies(loginCookie) // acquireLoginCookie챦쩔쩍챘?챦쩔쩍챗? 챦쩔쩍챘쩌쨍챦쩔쩍챦쩔쩍 '챈쩔징챙�쇺��?�≥�쩔쩍챙��?챦쩔쩍챘?' ?�샖�짖혧챗쨋탐
 	                .get();
 			
 			final String TARGET_CLASS = "panel-body";
@@ -355,13 +355,15 @@ public class BaekjoonCrawler {
 		
 	}
 	
-//	public static void main(String[] args) {
-//		String userID = "ksaid0203";
-//		String userPW = "rlawngh2@";
-//		
-//		BaekjoonCrawler bojcrawl = new BaekjoonCrawler(userID,userPW);
-//		bojcrawl.writeProblemJson("1001");
-//		bojcrawl.writeUserInfoJson("userID");
-//	}
-	
+/*	public static void main(String[] args) {
+		String userID = "rche";
+		String userPW = "illak0227";
+		
+		BaekjoonCrawler bojcrawl = new BaekjoonCrawler(userID,userPW);
+		ArrayList<String> probList = bojcrawl.crawlProblemNumbers();
+		for(String probNum : probList) {
+			bojcrawl.writeProblemJson(probNum);
+		}
+	}
+*/	
 }
