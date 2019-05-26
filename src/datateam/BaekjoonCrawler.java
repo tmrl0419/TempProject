@@ -331,7 +331,7 @@ public class BaekjoonCrawler {
 				                .cookies(loginCookie) 
 				                .get();
 				Elements box = document.getElementsByClass("col-lg-12");
-				source = box.text().replace("<", "$lt");
+				source = box.text().replace("<", "&lt");
 				source = source.replace(">", "&gt");
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
