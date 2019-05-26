@@ -1,4 +1,4 @@
-<%@ page import="datateam.BaekjoonCrawler,datateam.Cookie,swTeam.SourceAnalysis,java.util.*" language="java" contentType="text/html; charset=EUC-KR"
+<%@ page import="datateam.BaekjoonCrawler, datateam.Cookie, swTeam.*, java.util.*" language="java" contentType="text/html; charset=EUC-KR"
     pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
@@ -19,9 +19,10 @@
 <body>
 <%
 	Cookie ck = Cookie.getInstance();
-BaekjoonCrawler boj = new BaekjoonCrawler(ck.loginCookie);
-SourceAnalysis sa = new SourceAnalysis(request.getParameter("type"));
-String code = boj.getSource(request.getParameter("source"));
+	String num = request.getParameter("source");
+	BaekjoonCrawler boj = new BaekjoonCrawler(ck.loginCookie);
+	CheckDuplication check = new CheckDuplication("p"+num);
+	String code = boj.getSource(num);
 %>
 <h1>제출 번호 : <%=request.getParameter("source") %></h1>
 <h2>소스 코드</h2>
@@ -36,7 +37,12 @@ String code = boj.getSource(request.getParameter("source"));
 <div class="code">
 <pre>
 <%
-	out.print(sa.Analysis(ck.userID, request.getParameter("pronum"), code));
+	if ( check.Check() == 0 ) {
+		SourceAnalysis sa = new SourceAnalysis(request.getParameter("type"));
+		out.print(sa.Analysis("p"+num, code));
+	} else {
+		out.print(check.getResult());
+	}
 %>
 </pre>
 </div>
