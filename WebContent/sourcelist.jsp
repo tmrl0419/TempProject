@@ -5,10 +5,13 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BAEKJOON.GG</title>
-<link rel="stylesheet" href="css/bootstrap.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
+<title>BAEKJOON.GG</title>
 </head>
 <style type=text/css>
 	#view-on {width: 150px; height: 30px;}
+	
 </style>
 <body>
 <%
@@ -17,15 +20,31 @@
 	String proNum = request.getParameter("problem");
 	ArrayList<String> list = boj.getSourceList(ck.userID, proNum);
 %>
+
+	<header id="header">
+		<div class="inner">
+			<a href="main.jsp" class="logo">BACKJOON.GG</a>
+			<nav id="nav">
+				<a href="main.jsp">메인</a>
+				<a href="">링크 1</a>
+			</nav>
+		</div>
+	</header>
+
 <center>
-<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
 	<div id="view-on" style="display:inline">
 	<form action="codecompare.jsp" id="compare">
-	<input type="text" id="code1" name="code1">
-	<button class="btn btn-primary" type="submit">소스 비교</button>
-	<input type="text" id="code2" name="code2">
+			
+	<div style="width:25%">
+		<input type="text" id="code1" name="code1" style="background-color:hsla(0, 0%, 100%, 0.7)">
+		<button class="btn btn-primary" type="submit">소스 비교</button>
+		<input type="text" id="code2" name="code2" style="background-color:hsla(0, 0%, 100%, 0.7)">
+	</div>
 	</form>
 	</div>
+	
+
+	
 	<form id="analy" action="analysis.jsp" method="post">
 		<input type="hidden" id="source" name="source">
 		<input type="hidden" id="type" name="type">
@@ -86,4 +105,9 @@
 		idx++;
 	}
 </script>
+	
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 </html>

@@ -7,8 +7,8 @@
 <title>BAEKJOON.GG</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="assets/css/main.css" />
-
 </head>
+
 
 <%
 	String userid = null;
@@ -35,36 +35,36 @@
 				</div>
 			</header>
 			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
-			
+
 			<div id="welcome">
-			<h1><%=userid %> 님 환영합니다.</h1>
-			<a href="#" onclick="myinfo()">내정보</a>	
-			</div>
+			<center><h1><%=userid %> 님 환영합니다.</h1></center>
+			<center><a href="#" onclick="myinfo()">내정보</a></center>
+			</div>		
 
 			<form id="send" class="form-inline" action="main.jsp" method="post" style="display:none">
 
 			<section id="banner">
+			
 				<div class="inner">
-					<h1>BackJoon.GG:</h1>
-				</div>
 				
-				<div class="inner">
+					<h1>BackJoon.GG:</h1>
+	
 					<form method="post" action="#">
 						<div class="field half first">
 							<label for="name">ID</label>
-							<input type="text" name="id" placeholder="ID"/>
+							<input type="text" name="id" placeholder="ID" style="background-color:hsla(0, 0%, 100%, 0.7)"/>
 						</div>
 						<div class="field half">
 							<label for="email">Password</label>
-							<input type="password" name="pw" placeholder="Password" />
+							<input type="password" name="pw" placeholder="Password" style="background-color:hsla(0, 0%, 100%, 0.7)" />
 						</div>
 						<ul class="actions">
 							<center><li><input type="submit" value="Login" class="alt"/></li></center>
 						</ul>
 					</form>
 				</div>
+			</section>
 		</form>
-	
 </body>
 	
 <script src="assets/js/jquery.min.js"></script>
@@ -82,7 +82,7 @@
 			welcome.style.display = "none";
 		} else {
 			s.style.display = "none";
-			welcome.style.display = "block";
+			welcome.style.display = "none";
 		}
 	}
 	function myinfo() {
