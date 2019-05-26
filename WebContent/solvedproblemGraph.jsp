@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR"
+    pageEncoding="EUC-KR"%>
 <%@ page import="java.util.*" %>
 <%@ page import="web.*" %>
 <%
@@ -21,7 +21,7 @@
 	
 		    var data = new google.visualization.DataTable();
 		    data.addColumn('string', 'date');
-		    data.addColumn('number', 'М▒╪ К╛╦Л═° Л┬≤');
+		    data.addColumn('number', 'г╛ ╧╝а╕ ╪Ж');
 		    
 		    <%
 			    for(int i = 0 ; i < ans.size(); ++i) {
@@ -31,7 +31,7 @@
 		    
 		    var options = {
 				chart: {
-		        	title: '<%=userid%>' + 'К▀≤Л²╢ М▒╪ К╛╦Л═° Л┬≤ Й╥╦К·≤М■└',
+		        	title: '<%=userid%>' + '╢тюл г╛ ╧╝а╕ ╪Ж ╠в╥║га',
 				},
 		      	width: 700,
 		      	height: 250
@@ -43,7 +43,7 @@
 	    }
     </script>
 <meta charset="UTF-8">
-<title>К█╟Л²╢М└╟К╡═Л²╢Л┼╓ Л═∙КЁ╢ Л²╫Л√╢Л≤╓Й╦╟</title>
+<title>╣╔юлем╨ёюл╫╨ а╓╨╦ юп╬Н©ю╠Б</title>
 </head>
 <body>
 	<p id="data"> </p>
