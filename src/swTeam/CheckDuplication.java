@@ -18,7 +18,7 @@ public class CheckDuplication {
 	private static URLConnection conn;
 	
 	public CheckDuplication(String num) {
-		this.num = num;
+		this.num = "p"+num;
 		try {
 			url = new URL(PUBLIC_IP+Check);
 			conn = url.openConnection();
