@@ -29,21 +29,20 @@
 				<div class="inner">
 					<a href="main.jsp" class="logo">BACKJOON.GG</a>
 					<nav id="nav">
-						<a href="main.jsp">메인</a>
-						<a href="">링크 1</a>
+						<!-- <a href="main.jsp">메인</a> -->
+						<a href="#" onclick="myinfo()">내정보</a>
+						<a href="main.jsp" onclick="logout()">로그 아웃</a>
 					</nav>
 				</div>
 			</header>
 			<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
 			
-			<div id="welcome">
-			<h1><%=userid %> 님 환영합니다.</h1>
-			<a href="#" onclick="myinfo()">내정보</a>	
+			<section id="banner" style="min-height:550px">
+			<div id="welcome" class="inner">
+				<h1><%=userid %> 님 환영합니다.</h1>
 			</div>
 
 			<form id="send" class="form-inline" action="main.jsp" method="post" style="display:none">
-
-			<section id="banner">
 				<div class="inner">
 					<h1>BackJoon.GG:</h1>
 				</div>
@@ -51,19 +50,19 @@
 				<div class="inner">
 					<form method="post" action="#">
 						<div class="field half first">
-							<label for="name">ID</label>
-							<input type="text" name="id" placeholder="ID"/>
+							<label for="name"></label>
+							<input type="text" name="id" placeholder="ID" style="font-weight: bold; color:black; background-color: white; background-color:rgba(256,256,256,0.8)" />
 						</div>
 						<div class="field half">
-							<label for="email">Password</label>
-							<input type="password" name="pw" placeholder="Password" />
+							<label for="email"></label>
+							<input type="password" name="pw" placeholder="Password" style="font-weight: bold; color:black; background-color: white; background-color:rgba(256,256,256,0.8)"/>
 						</div>
 						<ul class="actions">
 							<center><li><input type="submit" value="Login" class="alt"/></li></center>
 						</ul>
 					</form>
 				</div>
-		</form>
+			</form>
 	
 </body>
 	

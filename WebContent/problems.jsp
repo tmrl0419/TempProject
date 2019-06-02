@@ -19,8 +19,14 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>BAEKJOON.GG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['line']});
@@ -51,8 +57,21 @@
 	}
 </script>
 <body>
+
+<header id="header">
+				<div class="inner">
+					<a href="main.jsp" class="logo">BACKJOON.GG</a>
+					<nav id="nav">
+						<a href="main.jsp">메인</a>
+						<a href="">링크 1</a>
+					</nav>
+				</div>
+</header>
+
+			<section id="one">
+				<div class="inner">
+
 <center>
-	<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
 		<p id="data"> </p>
 		<div id='linechart_material'></div>
 		<form action="sourcelist.jsp" id="send" method="post">
@@ -77,5 +96,8 @@
 			</div>
 		</form>
 </center>
+				</div>
+			</section>
+
 </body>
 </html>

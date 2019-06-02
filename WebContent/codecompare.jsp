@@ -26,7 +26,7 @@
 %>
 <div style='display:inline; width:1200px;'>
 <div class="code" style="float:left">
-<h2> <%=request.getParameter("code1") %> </h2>
+<h2> 제출 번호 : <%=request.getParameter("code1") %> </h2>
 <pre>
 <%
 out.print(cp.printCode(0));
@@ -34,6 +34,7 @@ out.print(cp.printCode(0));
 </pre>
 </div>
 <div class="code">
+<h2> 제출 번호 : <%=request.getParameter("code2") %> </h2>
 <pre>
 <%
 out.print(cp.printCode(1));

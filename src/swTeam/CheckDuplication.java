@@ -8,21 +8,19 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
 
-public class SourceAnalysis {
-
+public class CheckDuplication {
+	
 	private static final String PUBLIC_IP = "http://3.16.83.76/";
-	private static final String[] Source = { "cppcheck.php", "javapmd.php" };
+	private static final String Check = "checkfile.php";
+	private static String num;
 	private static URL url;
 	private static URLConnection conn;
-	private static int type;
-	private static int remove = 2;
 	
-	public SourceAnalysis(String t) {
-		type = Integer.parseInt(t);
+	public CheckDuplication(String num) {
+		this.num = "p"+num;
 		try {
-			url = new URL(PUBLIC_IP+Source[type]);
+			url = new URL(PUBLIC_IP+Check);
 			conn = url.openConnection();
 		} catch ( MalformedURLException e ) {
 			e.printStackTrace();
@@ -31,12 +29,10 @@ public class SourceAnalysis {
 		}
 	}
 	
-	public String Analysis(String num, String code) {
-		ArrayList<String> result = new ArrayList<>();
-		num = "p"+num;
+	public int Check() {
+		String line = "";
 		try {
 			String param = URLEncoder.encode("source", "UTF-8")+"="+URLEncoder.encode(num, "UTF-8");
-			param += "&"+URLEncoder.encode("content", "UTF-8")+"="+URLEncoder.encode(code, "UTF-8");
 			conn.setDoOutput(true);
 			conn.setUseCaches(false);
 			conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
@@ -52,22 +48,7 @@ public class SourceAnalysis {
 			}
 			
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(),"UTF-8"));
-			String line;
-			if ( type == 1 ) {
-				while ( (line = rd.readLine()) != null ) {
-					line = line.replaceAll("[<pre>]*[/\\w]*.java:", "");
-					line = "Line " + line;
-					result.add(line);
-				}
-			} else {
-				line = rd.readLine();	// Remove the first line that includes file info.
-				while ( (line = rd.readLine()) != null ) {
-					line = line.replaceAll("\\[cppsource/[\\w]*.cpp:", "");
-					line = line.replace("]", "");
-					line = "Line " + line;
-					result.add(line);
-				}
-			}
+			line = rd.readLine();
 			out.close();
 			rd.close();
 		} catch ( MalformedURLException e ) {
@@ -75,14 +56,24 @@ public class SourceAnalysis {
 		} catch ( IOException e ) {
 			e.printStackTrace();
 		}
-		if ( result.isEmpty() )
-			result.add("There is no code smells or Analysis is not done");
-		String r = "";
-		if ( type == 0 )
-			remove = 1;
-		for ( int i = 0; i < result.size()-remove; i++ )
-			r += result.get(i)+"\n";
-		return r;
+		return Integer.parseInt(line);
 	}
-
+	
+	public String getResult() {
+		String result = "";
+		try {
+			URL url2 = new URL(PUBLIC_IP+"/result/"+num+".txt");
+			URLConnection conn2 = url2.openConnection();
+			BufferedReader rd = new BufferedReader(new InputStreamReader(conn2.getInputStream(),"UTF-8"));
+			String line;
+			while ( (line = rd.readLine()) != null )
+				result += line + "\n";
+			rd.close();
+		} catch ( MalformedURLException e ) {
+			e.printStackTrace();
+		} catch ( IOException e ) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 }
