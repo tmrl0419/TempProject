@@ -66,8 +66,17 @@ public class CheckDuplication {
 			URLConnection conn2 = url2.openConnection();
 			BufferedReader rd = new BufferedReader(new InputStreamReader(conn2.getInputStream(),"UTF-8"));
 			String line;
-			while ( (line = rd.readLine()) != null )
+			while ( (line = rd.readLine()) != null ) {
+				if ( line.contains("java") ) {
+					line = line.replaceAll("[<pre>]*[/\\w]*.java:", "");
+					line = "Line " + line;
+				} else if ( line.contains("cppsource") ) {
+					line = line.replaceAll("\\[cppsource/[\\w]*.cpp:", "");
+					line = line.replace("]", "");
+					line = "Line " + line;
+				}
 				result += line + "\n";
+			}
 			rd.close();
 		} catch ( MalformedURLException e ) {
 			e.printStackTrace();

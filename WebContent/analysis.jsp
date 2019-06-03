@@ -23,13 +23,14 @@
 	BaekjoonCrawler boj = new BaekjoonCrawler(ck.loginCookie);
 	CheckDuplication check = new CheckDuplication(num);
 	String code = boj.getSource(num);
+	String print_code = code.replace("<", "&lt").replace(">", "&gt");
 %>
 <h1>제출 번호 : <%=request.getParameter("source") %></h1>
 <h2>소스 코드</h2>
 <div class="code">
 <pre>
 <%
-	out.print(code);
+	out.print(print_code);
 %>
 </pre>
 </div>
@@ -37,6 +38,7 @@
 <div class="code">
 <pre>
 <%
+	
 	if ( check.Check() == 0 ) {
 		SourceAnalysis sa = new SourceAnalysis(request.getParameter("type"));
 		out.print(sa.Analysis(num, code));
