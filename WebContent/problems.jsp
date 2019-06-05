@@ -33,7 +33,7 @@
 	google.charts.setOnLoadCallback(drawChart);	
 	function drawChart() {
 	    var data = new google.visualization.DataTable();
-	    data.addColumn('string', 'today');
+	    data.addColumn('string', '');
 	    data.addColumn('number', '푼 문제 수');
 	    <%
 		    for(int i = 0 ; i < ans.size(); ++i) {
@@ -76,18 +76,18 @@
 		<div id='linechart_material'></div>
 		<form action="sourcelist.jsp" id="send" method="post">
 			<input type="hidden" name="problem" id="problem">
-			<div style=\"line-height:130%\">
-				<h2>내가 푼 문제</h2>
-					<h3>
+			<div style=\"line-height:130%\"></br>
+				<h2 style="color:green">내가 푼 문제</h2>
+					<h3 style="color:MediumSeaGreen; line-height:100%; font-size:15px">
 						<%
 							for ( int i = 0; i < problems.size(); i++ )
-								out.print(problems.get(i)+"\t");
+								out.print(problems.get(i));
 						%>
 					</h3>
 			</div>
 			<div style=\"line-height:130%\">
-				<h2>틀린 문제</h2>
-					<h3>
+				<h2 style="color:red">틀린 문제</h2>
+					<h3 style="color:Tomato; line-height:100%; font-size:15px">
 						<%
 							for ( int i = 0; i < unproblems.size(); i++ )
 								out.print(unproblems.get(i)+"\t");

@@ -331,8 +331,7 @@ public class BaekjoonCrawler {
 				                .cookies(loginCookie) 
 				                .get();
 				Elements box = document.getElementsByClass("col-lg-12");
-				source = box.text().replace("<", "&lt");
-				source = source.replace(">", "&gt");
+				source = box.text();
 			} catch(IOException e) {
 				System.err.println("Failed to crawl problem page");
 			}
@@ -476,7 +475,7 @@ public void writeProblemCodes(String problemID, String language){
 		String UserPageURL = MAINURL + "/user/" +  userID;
 		Document doc = null;
 		ArrayList < String > res = new ArrayList< String >();
-		
+		res.add("<table><thead></thead><tbody>");
 		if(loginCookie == null) {
 			System.err.println("Login cookie is not acquired.");
 		}
@@ -497,13 +496,19 @@ public void writeProblemCodes(String problemID, String language){
 			Elements solvedProblem = myProblemList.get(0).select(SPLIT_CLASS);
 			
 			for( int i = 0; i < solvedProblem.size(); ++i ) {
-				String tmp = "<a href='#' ";
-				tmp += "onclick=\"change("+solvedProblem.get(i).text()+")\">"+solvedProblem.get(i).text()+"</a>";
+				String tmp = "";
+				if ( i % 18 == 0 )
+					tmp += "<tr>";
+				tmp += "<td><a href='#' ";
+				tmp += "onclick=\"change("+solvedProblem.get(i).text()+")\">"+solvedProblem.get(i).text()+"</a></td>";
+				if ( (i+1) % 18 == 0 )
+					tmp += "</tr>";
 				res.add(tmp);
 			}
 		} catch(IOException e) {
 			System.err.println("Fail to get User Information");
 		}
+		res.add("</tbody></table>");
 		return res;
 	}
 
@@ -511,7 +516,7 @@ public void writeProblemCodes(String problemID, String language){
 		String UserPageURL = MAINURL + "/user/" +  userID;
 		Document doc = null;
 		ArrayList < String > res = new ArrayList< String >();
-		
+		res.add("<table><thead></thead><tbody>");
 		if(loginCookie == null) {
 			System.err.println("Login cookie is not acquired.");
 		}
@@ -526,21 +531,21 @@ public void writeProblemCodes(String problemID, String language){
 			
 			final String TARGET_CLASS = "panel-body";
 			final String SPLIT_CLASS = "span.problem_number";
-			
-			
+						
 			Elements myProblemList = doc.getElementsByClass(TARGET_CLASS);
 			Elements unsolvedProblem = myProblemList.get(1).select(SPLIT_CLASS);
-			
-			
-			
-			for( int i = 0; i < unsolvedProblem.size(); ++i ) {
-				String tmp = "<a href='#' ";
-				tmp += "onclick=\"change("+unsolvedProblem.get(i).text()+")\">"+unsolvedProblem.get(i).text()+"</a>";
-				res.add(tmp);
-			}  
 
-			
-			
+			for( int i = 0; i < unsolvedProblem.size(); ++i ) {
+				String tmp = "";
+				if ( i % 18 == 0 )
+					tmp += "<tr>";
+				tmp += "<td><a href='#' ";
+				tmp += "onclick=\"change("+unsolvedProblem.get(i).text()+")\">"+unsolvedProblem.get(i).text()+"</a></td>";
+				if ( (i+1) % 18 == 0 )
+					tmp += "</tr>";
+				res.add(tmp);
+			}
+			res.add("</tbody></table>");
 		} catch(IOException e) {
 			System.err.println("Fail to get User Information");
 		}
