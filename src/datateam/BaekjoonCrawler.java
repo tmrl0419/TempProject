@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -631,6 +632,33 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public int requestProblemRating() {
 		
+	}
+	
+	public int calcRating(String prevProblem, String thisProblem,String exRating) {
+		int rating= 0;
+		int prevRating = Integer.parseInt(exRating);
+		prevProblem = prevProblem.replace(" ","");
+		thisProblem = thisProblem.replace(" ","");
+		String[] prevProbList = prevProblem.split(",");
+		String[] thisProbList = thisProblem.split(",");
+		ArrayList < String > prevList = new ArrayList<>(Arrays.asList(prevProbList)); 
+		ArrayList < String > thisList = new ArrayList<>(Arrays.asList(thisProbList)); 
+		
+		thisList.removeAll(prevList);
+		
+		for( String item: thisList) {
+			System.err.println(item);
+		}
+		
+		return rating;
+	}
+	
+	public static void main(String[] args) {
+		BaekjoonCrawler bojcrawl = new BaekjoonCrawler("Guest","guest");
+		bojcrawl.calcRating("1001, 1002, 1003, 1004", "1001, 1002, 1003, 1004, 1005, 1006","1234");
 	}
 }
