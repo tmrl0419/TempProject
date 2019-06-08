@@ -31,11 +31,11 @@ public class SourceAnalysis {
 		}
 	}
 	
-	public String Analysis(String userid, String problem, String code) {
+	public String Analysis(String num, String code) {
 		ArrayList<String> result = new ArrayList<>();
+		num = "p"+num;
 		try {
-			String filename = userid+"_"+problem;
-			String param = URLEncoder.encode("source", "UTF-8")+"="+URLEncoder.encode(filename, "UTF-8");
+			String param = URLEncoder.encode("source", "UTF-8")+"="+URLEncoder.encode(num, "UTF-8");
 			param += "&"+URLEncoder.encode("content", "UTF-8")+"="+URLEncoder.encode(code, "UTF-8");
 			conn.setDoOutput(true);
 			conn.setUseCaches(false);

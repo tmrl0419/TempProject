@@ -19,15 +19,21 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>BAEKJOON.GG</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="assets/css/main.css" />
 </head>
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/skel.min.js"></script>
+<script src="assets/js/util.js"></script>
+<script src="assets/js/main.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	google.charts.load('current', {'packages':['line']});
 	google.charts.setOnLoadCallback(drawChart);	
 	function drawChart() {
 	    var data = new google.visualization.DataTable();
-	    data.addColumn('string', 'today');
+	    data.addColumn('string', '');
 	    data.addColumn('number', '푼 문제 수');
 	    <%
 		    for(int i = 0 ; i < ans.size(); ++i) {
@@ -51,24 +57,37 @@
 	}
 </script>
 <body>
+
+<header id="header">
+				<div class="inner">
+					<a href="main.jsp" class="logo">BACKJOON.GG</a>
+					<nav id="nav">
+						<a href="main.jsp">메인</a>
+						<a href="">링크 1</a>
+					</nav>
+				</div>
+</header>
+
+			<section id="one">
+				<div class="inner">
+
 <center>
-	<img alt="MainLogo" src="img/main_logo.png" width="650" height="220"><p>
 		<p id="data"> </p>
 		<div id='linechart_material'></div>
 		<form action="sourcelist.jsp" id="send" method="post">
 			<input type="hidden" name="problem" id="problem">
-			<div style=\"line-height:130%\">
-				<h2>내가 푼 문제</h2>
-					<h3>
+			<div style=\"line-height:130%\"></br>
+				<h2 style="color:green">내가 푼 문제</h2>
+					<h3 style="color:MediumSeaGreen; line-height:100%; font-size:15px">
 						<%
 							for ( int i = 0; i < problems.size(); i++ )
-								out.print(problems.get(i)+"\t");
+								out.print(problems.get(i));
 						%>
 					</h3>
 			</div>
 			<div style=\"line-height:130%\">
-				<h2>틀린 문제</h2>
-					<h3>
+				<h2 style="color:red">틀린 문제</h2>
+					<h3 style="color:Tomato; line-height:100%; font-size:15px">
 						<%
 							for ( int i = 0; i < unproblems.size(); i++ )
 								out.print(unproblems.get(i)+"\t");
@@ -77,5 +96,8 @@
 			</div>
 		</form>
 </center>
+				</div>
+			</section>
+
 </body>
 </html>
