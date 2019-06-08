@@ -1,5 +1,6 @@
 package datateam;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -32,7 +33,8 @@ public class BaekjoonCrawler {
 	private String logResult = ""; 
 	public Document problemPageDocument = null;
 	private Map<String,String> loginCookie = null;
-	public Map<String, String> map = new HashMap<String, String>();
+	
+	public Map<String, String> problemRating = new HashMap<String, String>();
 	
 	
 	
@@ -40,6 +42,7 @@ public class BaekjoonCrawler {
 	public BaekjoonCrawler(String userID, String userPassword) {
 		checkInternetConnection();
 		acquireLoginCookie(userID,userPassword);
+		requestProblemRating();
 		if(logName == "") {
 			logName = getCurrentTimeString();
 		}
@@ -47,10 +50,12 @@ public class BaekjoonCrawler {
 	
 	public BaekjoonCrawler(Map<String, String> cookie) {
 		loginCookie = cookie;
+		requestProblemRating();
 		if(logName == "") {
 			logName = getCurrentTimeString();
 		}
 	}
+	
 	
 	// log-related Methods
 	public void updateLog(final String target) {
@@ -69,8 +74,27 @@ public class BaekjoonCrawler {
 	}
 	
 	// Methods
+	
+	public void requestProblemRating() {
+		 try{
+			 	File path = new File("");
+	            File file = new File(path.getAbsolutePath()+"\\stats\\ratings.txt");
+	            FileReader filereader = new FileReader(file);
+	            BufferedReader bufReader = new BufferedReader(filereader);
+	            String line = "";
+	            while((line = bufReader.readLine()) != null){
+	                String[] list = line.split(":");
+	                problemRating.put(list[0],list[1]);
+	            }
+	            bufReader.close();
+	        }catch (FileNotFoundException e) {
+	            // TODO: handle exception
+	        }catch(IOException e){
+	            System.out.println(e);
+	        }
+	}
+	
 	public String getLanguage(String str) throws FileNotFoundException, IOException, ParseException{
-		HashMap<String, String> map = new HashMap<String, String>();
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(new FileReader(".\\language.json"));
 		JSONObject jsonObject = (JSONObject) obj; 
@@ -634,12 +658,9 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		}
 	}
 	
-	public int requestProblemRating() {
-		
-	}
-	
 	public int calcRating(String prevProblem, String thisProblem,String exRating) {
-		int rating= 0;
+		int rating= Integer.parseInt(exRating);
+		int intExRating = Integer.parseInt(exRating);
 		int prevRating = Integer.parseInt(exRating);
 		prevProblem = prevProblem.replace(" ","");
 		thisProblem = thisProblem.replace(" ","");
@@ -651,9 +672,10 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		thisList.removeAll(prevList);
 		
 		for( String item: thisList) {
-			System.err.println(item);
+			float temp = Integer.parseInt(problemRating.get(item));
+			rating += (temp/intExRating) * 25;
+			System.err.println(rating);
 		}
-		
 		return rating;
 	}
 	
