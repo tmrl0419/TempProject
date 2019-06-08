@@ -2020,12 +2020,6 @@
 		form .field {
 			margin: 0 0 2em 0;
 		}
-		
-			form .field.one {
-				width: 25%;
-				float: left;
-				padding: 0 0 0 1em;
-			}
 
 			form .field.half {
 				width: 50%;
@@ -3364,8 +3358,6 @@
 			}
 
 		}
-		
-
 
 /* Banner */
 

@@ -1,7 +1,9 @@
 package datateam;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.FileReader;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,6 +17,8 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.*;
+
 
 public class BaekjoonCrawler {
 	
@@ -25,6 +29,18 @@ public class BaekjoonCrawler {
 	
 	public Document problemPageDocument = null;
 	private Map<String,String> loginCookie = null;
+	public Map<String, String> map = new HashMap<String, String>();
+	
+	public String getLanguage(String str) throws FileNotFoundException, IOException, ParseException{
+		HashMap<String, String> map = new HashMap<String, String>();
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(new FileReader(".\\language.json"));
+		JSONObject jsonObject = (JSONObject) obj; 
+		String language = (String)jsonObject.get(str); 
+	    return language;	
+	} 
+
+	
 	
 	// Constructor
 	public BaekjoonCrawler(String userID, String userPassword) {
@@ -34,107 +50,6 @@ public class BaekjoonCrawler {
 	
 	public BaekjoonCrawler(Map<String, String> cookie) {
 		loginCookie = cookie;
-	}
-	
-	// Methods
-	public HashMap<String,String> getMap(){
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("C++14","88");
-		map.put("Java","3");
-		map.put("Python 3","28");
-		map.put("C11","75");
-		map.put("PyPy3","73");
-		map.put("C","0");
-		map.put("C++","1");
-		map.put("C++11","49");
-		map.put("C++17","84");
-		map.put("Java (OpenJDK)","91");
-		map.put("Java 11","91");
-		map.put("Python 2","6");
-		map.put("PyPy2","32");
-		map.put("Ruby 2.5","68");
-		map.put("Kotlin (JVM)","69");
-		map.put("Kotlin (Native)","92");
-		map.put("Swift","74");
-		map.put("Text","74");
-		map.put("C# 6.0","62");
-		map.put("C# 6.0 (.NET)","86");
-		map.put("node.js","17");
-		map.put("Go","12");
-		map.put("Go (gccgo)","90");
-		map.put("D","29");
-		map.put("F#","37");
-		map.put("PHP","7");
-		map.put("Rust","44");
-		map.put("Rust 2018","94");
-		map.put("Pascal","2");
-		map.put("Scala","15");
-		map.put("Lua","16");
-		map.put("Perl","8");
-		map.put("Perl6","42");
-		map.put("Ruby 1.8","4");
-		map.put("Ruby 1.9","65");
-		map.put("R","72");
-		map.put("Haskell","11");
-		map.put("Object-C","10");
-		map.put("Object-C++","11");
-		map.put("C (Clang)","59");
-		map.put("C++ (Clang)","60");
-		map.put("C++11 (Clang)","66");
-		map.put("C++14 (Clang)","67");
-		map.put("C11 (Clang)","77");
-		map.put("C++17 (Clang)","85");
-		map.put("Ceylon","76");
-		map.put("Golfscript","79");
-		map.put("Octave","89");
-		map.put("Assembly (32bit)","27");
-		map.put("Assembly (64bit)","87");
-		map.put("C# 3.0","9");
-		map.put("VB.NET 2.0","20");
-		map.put("VB.NET 4.0","63");
-		map.put("Bash","5");
-		map.put("Fortran","13");
-		map.put("Scheme","14");
-		map.put("CoffeeScript","18");
-		map.put("Ada","19");
-		map.put("awk","21");
-		map.put("OCaml","22");
-		map.put("Brainfuck","23");
-		map.put("Whitespace","24");
-		map.put("Groovy","25");
-		map.put("Tcl","26");
-		map.put("Commom Lisp","30");
-		map.put("Erlang","31");
-		map.put("Clojure","33");
-		map.put("Rhino","34");  		
-		map.put("Cobol","35");
-		map.put("Smalltalk","36");
-		map.put("SpiderMonkey","38");
-		map.put("Falcon","39");
-		map.put("Factor","40");
-		map.put("Pike","41");
-		map.put("sed","43");
-		map.put("Dart","45");
-		map.put("Boo","46");
-		map.put("Intercal","47");
-		map.put("bc","48");
-		map.put("Oz","50");
-		map.put("Alice","51");
-		map.put("Prolog","52");
-		map.put("Nemerle","53");
-		map.put("Cobra","54");
-		map.put("Nimrod","55");
-		map.put("Forth","56");
-		map.put("Julia","57");
-		map.put("Io","61");
-		map.put("Algol 68","70");
-		map.put("Befunge","71");
-		map.put("FreeBASIC","78");
-		map.put("Gosu","80");
-		map.put("Haxe","81");
-		map.put("LOLCODE","82");
-		map.put("아희","83");
-	    return map;	
 	}
 	
 	public static void checkInternetConnection() {
@@ -337,11 +252,11 @@ public class BaekjoonCrawler {
 		return source;
 	}
 	
-public void writeProblemCodes(String problemID, String language){
+public void writeProblemCodes(String problemID, String languageName) throws FileNotFoundException, IOException, ParseException{
 		
 		Document doc = null;
 		JSONObject jsonObject = new JSONObject();
-		
+		String language = getLanguage(languageName);
 		if(loginCookie == null) {
 			System.err.println("Login cookie is not acquired.");
 		}
@@ -688,4 +603,10 @@ public void writeProblemCodes(String problemID, String language){
 		}
 		
 	}
+	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException {
+		BaekjoonCrawler bojcrawl = new BaekjoonCrawler("guest","guest");
+	    System.err.println(bojcrawl.getLanguage("C++14"));
+		 
+    }
+ 
 }
