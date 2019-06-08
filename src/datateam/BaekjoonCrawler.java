@@ -22,7 +22,8 @@ public class BaekjoonCrawler {
 	private static final boolean SHOW_LOG = true;
 	private static final String userAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36";
 	private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-	
+	private static final String LOG_PATH = "logs/";
+	private static String log_name = "";
 	public Document problemPageDocument = null;
 	private Map<String,String> loginCookie = null;
 	
