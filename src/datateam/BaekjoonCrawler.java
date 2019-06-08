@@ -26,8 +26,6 @@ public class BaekjoonCrawler {
 	public Document problemPageDocument = null;
 	private Map<String,String> loginCookie = null;
 	
-	
-	
 	// Constructor
 	public BaekjoonCrawler(String userID, String userPassword) {
 		checkInternetConnection();
