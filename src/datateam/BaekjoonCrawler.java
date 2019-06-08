@@ -62,7 +62,7 @@ public class BaekjoonCrawler {
 		logResult += "[" + getCurrentTimeString() + "] " + target;
 	}
 	
-	public void exportLog(String Target) {
+	public void exportLog() {
 		File file = new File(LOG_PATH+logName+".log");	
 		try {
 			FileWriter fw = new FileWriter(file);
@@ -674,13 +674,14 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		for( String item: thisList) {
 			float temp = Integer.parseInt(problemRating.get(item));
 			rating += (temp/intExRating) * 25;
-			System.err.println(rating);
 		}
 		return rating;
 	}
 	
 	public static void main(String[] args) {
 		BaekjoonCrawler bojcrawl = new BaekjoonCrawler("Guest","guest");
-		bojcrawl.calcRating("1001, 1002, 1003, 1004", "1001, 1002, 1003, 1004, 1005, 1006","1234");
+		bojcrawl.updateLog("test");
+		bojcrawl.exportLog();
+		
 	}
 }
