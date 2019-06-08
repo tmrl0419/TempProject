@@ -673,13 +673,16 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		
 		for( String item: thisList) {
 			float temp = Integer.parseInt(problemRating.get(item));
+			if(temp == -1) continue; // 레이팅 측정 안 된 경우
 			rating += (temp/intExRating) * 25;
 		}
+		System.err.println(rating);
 		return rating;
 	}
 	
 	public static void main(String[] args) {
 		BaekjoonCrawler bojcrawl = new BaekjoonCrawler("Guest","guest");
+		bojcrawl.calcRating("","1131","1500");
 		bojcrawl.updateLog("test");
 		bojcrawl.exportLog();
 		
