@@ -658,10 +658,9 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		}
 	}
 	
-	public int calcRating(String prevProblem, String thisProblem,String exRating) {
-		int rating= Integer.parseInt(exRating);
-		int intExRating = Integer.parseInt(exRating);
-		int prevRating = Integer.parseInt(exRating);
+	public float calcRating(String prevProblem, String thisProblem,String exRating) {
+		float floatExRating = Float.parseFloat(exRating);
+		float rating= floatExRating;
 		prevProblem = prevProblem.replace(" ","");
 		thisProblem = thisProblem.replace(" ","");
 		String[] prevProbList = prevProblem.split(",");
@@ -674,7 +673,7 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 		for( String item: thisList) {
 			float temp = Integer.parseInt(problemRating.get(item));
 			if(temp == -1) continue; // 레이팅 측정 안 된 경우
-			rating += (temp/intExRating) * 25;
+			rating += (temp/floatExRating) * 25;
 		}
 		System.err.println(rating);
 		return rating;
@@ -682,7 +681,7 @@ public void writeProblemCodes(String problemID, String languageName) throws File
 	
 	public static void main(String[] args) {
 		BaekjoonCrawler bojcrawl = new BaekjoonCrawler("Guest","guest");
-		bojcrawl.calcRating("","1131","1500");
+		bojcrawl.calcRating("","1131,1000,1001,1002","1500");
 		bojcrawl.updateLog("test");
 		bojcrawl.exportLog();
 		
